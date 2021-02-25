@@ -66,7 +66,7 @@
         }
 
         input::placeholder {
-            color: rgb(145, 145, 145);
+            color: rgb(78, 78, 78);
         }
 
         option {
@@ -95,7 +95,11 @@
         button:hover {
             background: #095484;
         }
-
+        .dis
+        {
+            background-color: rgb(165, 165, 165);
+            color:rgb(0, 0, 0);
+        }
         @media (min-width: 568px) {
             .info {
                 justify-content: space-between;
@@ -119,6 +123,7 @@
                 margin-left: 33%;
 
             };
+
         }
     </style>
 </head>
@@ -135,9 +140,9 @@
                 <p>Delivery Date</p>
                 <input type="date" name="name" placeholder="Please enter desired delivery date">
                 <p>Suggested Price</p>
-                <input type="text" name="name" placeholder="GME to the moon">
+                <input type="number" class = "dis" name="name" disabled placeholder="Here will be the Suggested Price">
                 <p>Total Amount Due</p>
-                <input type="number" name="name" placeholder="$2000">
+                <input type="number" class = "dis"name="name" placeholder="$2000" disabled>
             </div>
             <button href="/" class="button">Submit</button>
         </form>
