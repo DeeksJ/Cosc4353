@@ -85,6 +85,6 @@ function updateProfile($username, $name, $address1, $address2, $city, $state, $z
 }
 
 //Need to comment this out when testing
-//updateProfile($postUsername, $postName, $postAddress1, $postAddress2, $postCity, $postState, $postZip);
+updateProfile($postUsername, $postName, $postAddress1, $postAddress2, $postCity, $postState, $postZip);
 
 ?>
