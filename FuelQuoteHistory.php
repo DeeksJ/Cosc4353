@@ -7,16 +7,15 @@ function testing($string)
 {
     return $string;
 }
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "fuelquote";
-$conn = NEW MySQLi($servername, $username, $password,$db);
+$servername = "sql203.epizy.com";
+$username = "epiz_28288046";
+$password = "wSejTvlnICy";
+$db = "epiz_28288046_fuelQuotes";
+$conn = new MySQLi($servername, $username, $password, $db);
 if (!$conn) {
-   die("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
-//echo "Connected successfully";
-$id = "123"
+$id = $_GET["username"];
 ?>
 
 <head>
@@ -131,7 +130,7 @@ $id = "123"
         <?php
 
         $query = $conn->query("SELECT * FROM fuelquotehistory WHERE id = $id");
-        
+
 
         ?>
         <table style="width:100%">
@@ -154,12 +153,12 @@ $id = "123"
                         <td><?php echo $row["pricePer"]; ?></td>
                         <td><?php echo $row["total"]; ?></td>
                     </tr>
-        
-<?php
+
+            <?php
                 }
-            } 
+            }
             ?>
-            </table>
+        </table>
     </div>
 </body>
 

@@ -62,7 +62,7 @@
             margin-bottom: 30px;
             background: rgb(255, 255, 255);
             border: 1px rgb(0, 0, 0);
-            
+
         }
 
         input::placeholder {
@@ -95,11 +95,12 @@
         button:hover {
             background: #095484;
         }
-        .dis
-        {
+
+        .dis {
             background-color: rgb(165, 165, 165);
-            color:rgb(0, 0, 0);
+            color: rgb(0, 0, 0);
         }
+
         @media (min-width: 568px) {
             .info {
                 justify-content: space-between;
@@ -118,11 +119,14 @@
                 width: 30%;
                 margin-left: 200px;
             }
+
             p {
                 color: black;
                 margin-left: 33%;
 
-            };
+            }
+
+            ;
 
         }
     </style>
@@ -132,36 +136,38 @@
     <div class="main-block">
         <h1>Fuel Quote Form</h1>
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $db = "fuelquote";
-        $conn = NEW MySQLi($servername, $username, $password,$db);
+        $servername = "sql203.epizy.com";
+        $username = "epiz_28288046";
+        $password = "wSejTvlnICy";
+        $db = "epiz_28288046_fuelQuotes";
+        $conn = new MySQLi($servername, $username, $password, $db);
         if (!$conn) {
-           die("Connection failed: " . mysqli_connect_error());
+            die("Connection failed: " . mysqli_connect_error());
         }
-        $id = "123";
+        $id = $_GET["username"];
         $profile = mysqli_query($db, "SELECT * FROM fuelquotehistory WHERE id = $id");
         $data = mysqli_fetch_array($profile);
 
         ?>
-        <form method = "post" action="submitQuote.php"onload="getUser('<?php $id ?>')">
+        <form method="post" action="submitQuote.php" onload="getUser('<?php $id ?>')">
             <div class="info">
                 <p>Gallons Requested</p>
-                <input type="number" name="galReq" value="<?php echo $data['galReq']?>" required placeholder="Enter a number">
+                <input type="number" name="galReq" value="<?php echo $data['galReq'] ?>" required placeholder="Enter a number">
                 <p>Delivery Address</p>
-                <input type="text" name="delAdd" value="<?php echo $data['delAdd']?>" required placeholder="123 Main Street">
+                <input type="text" name="delAdd" value="<?php echo $data['delAdd'] ?>" required placeholder="123 Main Street">
                 <p>Delivery Date</p>
-                <input type="date" name="date" value="<?php echo $data['date']?>" required placeholder="Please enter desired delivery date">
+                <input type="date" name="date" value="<?php echo $data['date'] ?>" required placeholder="Please enter desired delivery date">
                 <p>Suggested Price</p>
-                <input type="number" class = "dis" name="sugPrice" value="<?php echo $data['sugPrice']?>" disabled placeholder="Here will be the Suggested Price">
+                <input type="number" class="dis" name="sugPrice" value="<?php echo $data['sugPrice'] ?>"  placeholder="Here will be the Suggested Price">
                 <p>Total Amount Due</p>
-                <input type="number" class = "dis"name="total"value="<?php echo $data['total']?>"  placeholder="$2000" disabled>
+                <input type="number" class="dis" name="total" value="<?php echo $data['total'] ?>" placeholder="$2000" >
             </div>
-            <button href="/" class="button">Submit</button>
+            <input type="submit" name="submit" value="Submit"/>
         </form>
-    </div>
+        </div>
     
+
+
 </body>
 
 </html>
