@@ -5,21 +5,19 @@
 </head>
 
 <?php
-
-$db = mysqli_connect("localhost", "root", "", "profiletest");
+$db = mysqli_connect("sql203.epizy.com", "epiz_28288046", "wSejTvlnICy", "epiz_28288046_fuelQuotes", "3306");
 
 if(!$db){
 
     die("Connection Failed: " . mysqli_connect_error());
 }
 
-$username = "rloseguera";
-$profile = mysqli_query($db, "select * from customers where username='$username'");
-$data = mysqli_fetch_array($profile);
+session_start();
+$username = $_SESSION["username"];
 
-function testData(){
-    return $data;
-}
+//$username = "rloseguera";
+$profile = mysqli_query($db, "select * from profiledata where username='$username'");
+$data = mysqli_fetch_array($profile);
 
 ?>
 

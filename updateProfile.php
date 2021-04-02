@@ -18,10 +18,10 @@ function updateProfile($username, $name, $address1, $address2, $city, $state, $z
                     if(!empty($city) and strlen($city) <= 100){
                         if(!empty($state) and strlen($state) == 2){
                         if(!empty($zip) and (strlen($zip) >= 5 and strlen($zip) <= 9)){
-                                $host = "localhost";
-                                $dbusername = "root";
-                                $dbpassword = "";
-                                $dbname = "profiletest";
+                                $host = "sql203.epizy.com";
+                                $dbusername = "epiz_28288046";
+                                $dbpassword = "wSejTvlnICy";
+                                $dbname = "epiz_28288046_fuelQuotes";
 
                                 //Creating connection
                                 $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
@@ -31,9 +31,10 @@ function updateProfile($username, $name, $address1, $address2, $city, $state, $z
                                 }
                                 else{
                                     //Update Values
-                                    $sql = "UPDATE customers SET name='$name', address1='$address1', address2='$address2', city='$city', state='$state', zip='$zip' WHERE username='$username'";
+                                    $sql = "UPDATE profiledata SET name='$name', address1='$address1', address2='$address2', city='$city', state='$state', zip='$zip' WHERE username='$username'";
                                     if($conn->query($sql)){
                                         echo "New record has been updated successfully";
+                                        header("Location: http://fuelquote.epizy.com/profile.php?");
                                         return 1;
                                     }
                                     else{
