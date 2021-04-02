@@ -10,25 +10,37 @@
 		}
 		if(strlen($username)>15){
 			echo "Username is too long. Maximum 15 characters.";
+            //header("location: login.html");
 			return 1;
 		} elseif (strlen($password)>15) {
 			echo "Password is too long. Maximum 15 characters.";
+            //header("location: login.html");
 			return 2;
 		}else {
-		$sql = "SELECT username FROM users WHERE username = '$username' and password = '$password' LIMIT 1";
+            $options = [
+                'cost' => 12,
+            ];
+        $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+        //$hash = password_hash($password, PASSWORD_DEFAULT);
+        //$hash = "$2y$10$Ze3PffUPwKS989NBpHJFQ.PkM5M5YKAOvsLeK0YHb.v";
+          echo "Generated hash: ".$hash;
+
+        $sql = "SELECT password FROM users WHERE username = '$username'";
 		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		if(empty($row)){
-			echo "Username or Password not valid.";
-			return 3;
-			header("location: login.html");
-		} else {
-			echo "Login was successful";
+        //echo $result;
+
+        $verify = password_verify($password, $hash);
+
+        if ($verify) {
+            echo 'Password Verified! Login Successful.';
             session_start();
             $_SESSION["username"] = $username;
             header("location: userHub.php");
 			return 4;
-		}
+        } else {
+            echo 'Incorrect Password!';
+            return 3;
+        }
 		$conn->close();
 	}	
 }

@@ -27,7 +27,11 @@
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		if(empty($row)){
-			$sql = "INSERT INTO `users` (`username`, `password`) VALUES ('$username', '$password')";
+             $options = [
+                'cost' => 12,
+            ];
+            $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+			$sql = "INSERT INTO `users` (`username`, `password`) VALUES ('$username', '$hash')";
 			$conn->query($sql);	
             $sql = "INSERT INTO `profiledata` (`username`, `name`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('$username', '', '', NULL, '', '', '')";
 			$conn->query($sql);	
