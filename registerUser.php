@@ -1,17 +1,19 @@
-<?php
+<?php	
+    $username = filter_input(INPUT_POST, 'username');
+    $password = filter_input(INPUT_POST, 'password');
 	function registerUser($username,$password) {
 	$host = 'localhost';
 	$dbusername= 'root';
 	$dbpassword = '';
 	$dbname= 'accounts';
 	
-	$conn = new mysqli($host,$dbusername,$dbpassword,$dbname);
+	$conn = new mysqli("sql203.epizy.com", "epiz_28288046", "wSejTvlnICy", "epiz_28288046_fuelQuotes");
 	
 	if(!$conn){
 		die("Connection Failed: ".mysqli_connect_error());
 	}
-	//$username = mysqli_real_escape_string($conn,$_POST['username']);
-	//$password = mysqli_real_escape_string($conn,$_POST['password']);
+    
+
 	if(strlen($username)>15){
 		echo "Username is too long. Maximum 15 characters.";
 		return 1;
@@ -27,10 +29,13 @@
 		if(empty($row)){
 			$sql = "INSERT INTO `users` (`username`, `password`) VALUES ('$username', '$password')";
 			$conn->query($sql);	
-
+            $sql = "INSERT INTO `profiledata` (`username`, `name`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('$username', '', '', NULL, '', '', '')";
+			$conn->query($sql);	
+    
 			echo "Registration of user was successful";
+            header("location: login.html");
 			return 3;
-			//header("location: login.html");
+			
 		} else {
 			echo "Username already exists. Please enter new username.";
 			return 2;
@@ -38,4 +43,6 @@
 	}
 	$conn->close();
 }
+
+registerUser($username,$password);
 ?>
