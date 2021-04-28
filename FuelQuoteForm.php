@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -66,7 +67,7 @@
         }
 
         input::placeholder {
-            color: rgb(78, 78, 78);
+            color: rgb(0, 0, 0);
         }
 
         option {
@@ -135,6 +136,9 @@
 <body>
     <div class="main-block">
         <h1>Fuel Quote Form</h1>
+         <form method = "POST" action = "profile.php">
+	        <button type="submit">Profile Management</button><br>
+        </form>
         <?php
         $servername = "sql203.epizy.com";
         $username = "epiz_28288046";
@@ -143,31 +147,87 @@
         $conn = new MySQLi($servername, $username, $password, $db);
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
+            echo "Failed to connect";
         }
-        $id = $_GET["username"];
-        $profile = mysqli_query($db, "SELECT * FROM fuelquotehistory WHERE id = $id");
-        $data = mysqli_fetch_array($profile);
+        
+        $id = $_SESSION["username"];
+        echo $id;
+        $result =  $conn->query("SELECT * FROM profiledata WHERE username = '$id'");
+        $data = $result->fetch_assoc();
+        $_SESSION["state"] = $data["state"];
+        global $pricePerGallon;
+        global $totalCost;
+        global $gallons;
+        $gallons = 0;
 
+        if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['getQuote'])){
+            getPrice();
+            $gallons = $_POST['galReq'];
+            $_SESSION["galsReq"] =$_POST['galReq'];
+            echo $_SESSION["galsReq"];
+        }
+        $query = $conn->query("select * from fuelquotehistory where id = '$id'");
+        $_SESSION["rows"] = mysqli_num_rows($query);
+        //echo $_SESSION["rows"];
+        function getPrice() {
+            if($_SESSION["state"] == "TX")
+            {
+                $_SESSION["locFac"] = .02; 
+            }
+            else
+            {
+                    $_SESSION["locFac"] = .04;
+            }
+            if ($_SESSION["rows"]==0)
+            {
+                $_SESSION["rateHist"] = 0;
+            }
+            else
+            {
+                $_SESSION["rateHist"] = .01;
+            }
+            if($_SESSION["galsReq"] > 1000)
+            {
+                $_SESSION["galReqFac"] = .02;
+            }
+            else{
+                $_SESSION["galReqFac"] = .03;
+            }
+            include 'pricingModule.php';
+
+            $pricePerGallon = $_SESSION["ppg"];
+            $totalCost = $_SESSION["total"];
+            sleep(5);
+            header("Refresh:0");
+        }
+        function runMyFunction() {
+            header("Location: http://www.http://www.fuelquote.epizy.com/FuelQuoteHistory.php");
+        }
+
+        if (isset($_GET['hello'])) {
+             runMyFunction();
+        }
         ?>
         <form method="post" action="submitQuote.php" onload="getUser('<?php $id ?>')">
             <div class="info">
                 <p>Gallons Requested</p>
-                <input type="number" name="galReq" value="<?php echo $data['galReq'] ?>" required placeholder="Enter a number">
+                <input type="number" name="galReq" value="" required placeholder="Enter a number">
                 <p>Delivery Address</p>
-                <input type="text" name="delAdd" value="<?php echo $data['delAdd'] ?>" required placeholder="123 Main Street">
+                <input type="text" name="delAdd"  value="<?php echo $data["address1"]?>" required>
                 <p>Delivery Date</p>
-                <input type="date" name="date" value="<?php echo $data['date'] ?>" required placeholder="Please enter desired delivery date">
+                <input type="date" name="date" value="<?php echo $data["date"] ?>" required placeholder="Please enter desired delivery date">
                 <p>Suggested Price</p>
-                <input type="number" class="dis" name="sugPrice" value="<?php echo $data['sugPrice'] ?>"  placeholder="Here will be the Suggested Price">
+                <input type="number" class="dis" name="sugPrice" readonly value="<?php echo $_SESSION["ppg"] ?>"  placeholder="Here will be the Suggested Price">
                 <p>Total Amount Due</p>
-                <input type="number" class="dis" name="total" value="<?php echo $data['total'] ?>" placeholder="$2000" >
+                <input type="number" class="dis" name="total" readonly value="<?php echo $_SESSION["total"] ?>" placeholder="Price will go here" >
             </div>
             <input type="submit" name="submit" value="Submit"/>
+            <button type="submit" name="getQuote" formaction="FuelQuoteForm.php">Get Quote</button>
+        </form>
+        <form method = "POST" action = "FuelQuoteHistory.php">
+	        <button type="submit">Fuel Quote History</button><br>
         </form>
         </div>
-    
-
-
 </body>
 
 </html>

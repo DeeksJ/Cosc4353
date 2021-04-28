@@ -20,7 +20,6 @@
 </style>
 </head>
 <body>
-
 <h1>User Hub</h1>
 <div class="container">
  <form method = "POST" action = "profile.php">

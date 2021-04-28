@@ -3,7 +3,8 @@ $servername = "sql203.epizy.com";
 $username = "epiz_28288046";
 $password = "wSejTvlnICy";
 $db = "epiz_28288046_fuelQuotes";
-$id = "123";
+session_start();
+$id = $_SESSION["username"];
 $postgalReq = filter_input(INPUT_POST, 'galReq');
 $postdelAdd = filter_input(INPUT_POST, 'delAdd');
 $postdate = filter_input(INPUT_POST, 'date');
@@ -13,7 +14,7 @@ submitQuote($id, $postgalReq, $postdelAdd, $postdate, $postsugPrice, $posttotal)
 function submitQuote($id, $galReq, $delAdd, $date, $sugPrice, $total)
 {
     if (is_numeric($galReq) && !empty($galReq)) {
-        if (is_numeric($delAdd) && !empty($delAdd)) {
+        if (!empty($delAdd) && !empty($delAdd)) {
             if (!empty($date)) {
                 if (is_numeric($sugPrice) && !empty($sugPrice)) {
                     if (is_numeric($total) && !empty($total)) {
@@ -64,5 +65,5 @@ function submitQuote($id, $galReq, $delAdd, $date, $sugPrice, $total)
         return 1;
     }
 }
-
+header("Location: http://www.fuelquote.epizy.com/FuelQuoteHistory.php");
 ?>

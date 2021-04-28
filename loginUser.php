@@ -20,16 +20,28 @@
             $options = [
                 'cost' => 12,
             ];
-        $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+
+        $sql = "SELECT * FROM users where username = '$username'";
+        $result = $conn->query($sql);
+        if(mysqli_num_rows($result)<1){
+            echo 'Username does not exists';
+            return 1;
+        }
+        $hash = password_hash($password, PASSWORD_BCRYPT);
         //$hash = password_hash($password, PASSWORD_DEFAULT);
         //$hash = "$2y$10$Ze3PffUPwKS989NBpHJFQ.PkM5M5YKAOvsLeK0YHb.v";
-          echo "Generated hash: ".$hash;
+        #echo "Generated hash: ".$hash;
 
         $sql = "SELECT password FROM users WHERE username = '$username'";
 		$result = $conn->query($sql);
         //echo $result;
-
-        $verify = password_verify($password, $hash);
+        if($result->num_rows >0){
+            $row = $result->fetch_assoc();
+            $tester = $row["password"];
+        }
+        $verify = password_verify($password, $tester);
+        
+        
 
         if ($verify) {
             echo 'Password Verified! Login Successful.';

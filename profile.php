@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,9 @@ if(!$db){
     die("Connection Failed: " . mysqli_connect_error());
 }
 
-session_start();
+#session_start();
 $username = $_SESSION["username"];
 
-//$username = "rloseguera";
 $profile = mysqli_query($db, "select * from profiledata where username='$username'");
 $data = mysqli_fetch_array($profile);
 
@@ -119,4 +119,10 @@ $data = mysqli_fetch_array($profile);
             </div>
         </div>
     </div>
+</form>
+<form method = "POST" action = "FuelQuoteForm.php">
+	<button type="submit">Fuel Quote</button><br>
+</form>
+<form method = "POST" action = "userHub.php">
+	<button type="submit">User Hub</button><br>
 </form>

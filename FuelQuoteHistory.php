@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <?php
@@ -15,7 +16,10 @@ $conn = new MySQLi($servername, $username, $password, $db);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$id = $_GET["username"];
+
+
+$id = $_SESSSION["username"];
+
 ?>
 
 <head>
@@ -127,12 +131,6 @@ $id = $_GET["username"];
             </tr>
         </table>
         --->
-        <?php
-
-        $query = $conn->query("SELECT * FROM fuelquotehistory WHERE id = $id");
-
-
-        ?>
         <table style="width:100%">
             <tr>
                 <th>Gallons Requested</th>
@@ -142,10 +140,10 @@ $id = $_GET["username"];
                 <th>Total Amount Due</th>
             </tr>
             <?php
-            if ($query->num_rows > 0) {
+            $query = $conn->query("SELECT * FROM fuelquotehistory WHERE id = '$id'");
+            if (mysqli_num_rows($query) > 0) {
                 while ($row = $query->fetch_assoc()) {
             ?>
-
                     <tr>
                         <td><?php echo $row["galReq"]; ?></td>
                         <td><?php echo $row["delAdd"]; ?></td>
@@ -157,9 +155,18 @@ $id = $_GET["username"];
             <?php
                 }
             }
+            else
+            {
+                echo $_SESSION["rows"];
+                echo "words";
+            }
             ?>
         </table>
+        <form method = "POST" action = "FuelQuoteForm.php">
+	    <button type="submit">Fuel Quote</button><br>
+    </form> 
     </div>
+    
 </body>
 
 </html>
