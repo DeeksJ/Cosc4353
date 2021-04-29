@@ -7,7 +7,7 @@
 	$dbpassword = '';
 	$dbname= 'accounts';
 	
-	$conn = new mysqli("sql203.epizy.com", "epiz_28288046", "wSejTvlnICy", "epiz_28288046_fuelQuotes");
+	$conn = new mysqli("127.0.0.1", "root", "", "epiz_28288046_fuelQuotes");
 	
 	if(!$conn){
 		die("Connection Failed: ".mysqli_connect_error());
