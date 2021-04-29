@@ -6,7 +6,7 @@
 </head>
 
 <?php
-$db = mysqli_connect("sql203.epizy.com", "epiz_28288046", "wSejTvlnICy", "epiz_28288046_fuelQuotes", "3306");
+$db = mysqli_connect("127.0.0.1", "root", "", "epiz_28288046_fuelQuotes", "3306");
 
 if(!$db){
 
