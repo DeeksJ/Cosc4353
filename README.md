@@ -13,32 +13,32 @@ Instructions to set up Group 24’s Project
 10. Use the following SQL queries to create the database and tables:
 CREATE DATABASE epiz_28288046_fuelQuotes;
 
-SQL statements for profile management table:
-CREATE TABLE `profiledata` (
- `username` varchar(50) NOT NULL,
- `name` varchar(50) NOT NULL,
- `address1` varchar(100) NOT NULL,
- `address2` varchar(100) DEFAULT NULL,
- `city` varchar(100) NOT NULL,
- `state` varchar(2) NOT NULL,
- `zip` varchar(9) NOT NULL,
- UNIQUE KEY `username` (`username`)
-) 
+	SQL statements for profile management table:
+	CREATE TABLE `profiledata` (
+	 `username` varchar(50) NOT NULL,
+	 `name` varchar(50) NOT NULL,
+	 `address1` varchar(100) NOT NULL,
+	 `address2` varchar(100) DEFAULT NULL,
+	 `city` varchar(100) NOT NULL,
+	 `state` varchar(2) NOT NULL,
+	 `zip` varchar(9) NOT NULL,
+	 UNIQUE KEY `username` (`username`)
+	) 
 
-SQL Statement for fuel quote history table:
-CREATE TABLE `fuelquotehistory` (
- `id` int(10) NOT NULL,
- `galReq` int(10) NOT NULL,
- `delAdd` varchar(50) NOT NULL, `date` date NOT NULL,
- `pricePer` int(10) NOT NULL,
- `total` int(10) NOT NULL
-) 
+	SQL Statement for fuel quote history table:
+	CREATE TABLE `fuelquotehistory` (
+	 `id` int(10) NOT NULL,
+	 `galReq` int(10) NOT NULL,
+	 `delAdd` varchar(50) NOT NULL, `date` date NOT NULL,
+	 `pricePer` int(10) NOT NULL,
+	 `total` int(10) NOT NULL
+	) 
 
-SQL statement to create users table:
-CREATE TABLE `users` (
- `username` varchar(20) DEFAULT NULL,
- `password` varchar(255) DEFAULT NULL
-)
+	SQL statement to create users table:
+	CREATE TABLE `users` (
+	 `username` varchar(20) DEFAULT NULL,
+	 `password` varchar(255) DEFAULT NULL
+	)
 
 11. In order to run the unit tests you will need to download and install both XDebugger and PHPUnit from the following links:
 				https://xdebug.org/download
