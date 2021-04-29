@@ -10,16 +10,16 @@ final class registerTest extends TestCase
         include 'registerUser.php';
 		//testing username length
         $result = registerUser("1234567891012134", "123");
-        $this->assertEquals(1, $result);
+        $this->assertEquals($result,1);
 		//testing password length 
         $result = registerUser("123", "12345678910111274");
-        $this->assertEquals(1, $result);
+        $this->assertEquals($result,1);
 		//testing username invalid
         $result = registerUser("123", "Hello");
-        $this->assertEquals(2, $result);
+        $this->assertEquals($result,2);
         //successful registration
         $result = registerUser("4321", "Hello");
-        $this->assertEquals(3, $result);
+        $this->assertEquals($result,3);
         	
         
         echo $result;
