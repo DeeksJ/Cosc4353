@@ -18,9 +18,9 @@ function updateProfile($username, $name, $address1, $address2, $city, $state, $z
                     if(!empty($city) and strlen($city) <= 100){
                         if(!empty($state) and strlen($state) == 2){
                         if(!empty($zip) and (strlen($zip) >= 5 and strlen($zip) <= 9)){
-                                $host = "sql203.epizy.com";
-                                $dbusername = "epiz_28288046";
-                                $dbpassword = "wSejTvlnICy";
+                                $host = "127.0.0.1";
+                                $dbusername = "root";
+                                $dbpassword = "";
                                 $dbname = "epiz_28288046_fuelQuotes";
 
                                 //Creating connection
