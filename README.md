@@ -1,16 +1,16 @@
 # Cosc4353 - Group 24
 Instructions to set up Group 24’s Project
 
-Install XAMPP from here: https://www.apachefriends.org/download.html
-Download Version 8.0.3 for your OS
-Make sure you have MySQL, Apache, phpMyAdmin, and PHP selected as components in the installation process.
-Locate the main folder where XAMPP has installed
-Within the main folder there will be a folder named htdocs. This is where you will need to keep your program files in order to run them.
-Start up XAMMP control panel 
-Click Start next to Apache and MySQL.
-Make sure all program files are within the htdocs folder
-Open up 127.0.0.1/login.html or localhost/login.html
-Use the following SQL queries to create the database and tables:
+1. Install XAMPP from here: https://www.apachefriends.org/download.html
+2. Download Version 8.0.3 for your OS
+3. Make sure you have MySQL, Apache, phpMyAdmin, and PHP selected as components in the installation process.
+4. Locate the main folder where XAMPP has installed
+5. Within the main folder there will be a folder named htdocs. This is where you will need to keep your program files in order to run them.
+6. Start up XAMMP control panel 
+7. Click Start next to Apache and MySQL.
+8. Make sure all program files are within the htdocs folder
+9. Open up 127.0.0.1/login.html or localhost/login.html
+10. Use the following SQL queries to create the database and tables:
 CREATE DATABASE epiz_28288046_fuelQuotes;
 
 SQL statements for profile management table:
@@ -40,6 +40,6 @@ CREATE TABLE `users` (
  `password` varchar(255) DEFAULT NULL
 )
 
-In order to run the unit tests you will need to download and install both XDebugger and PHPUnit from the following links:
+11. In order to run the unit tests you will need to download and install both XDebugger and PHPUnit from the following links:
 				https://xdebug.org/download
 				https://phpunit.de/
