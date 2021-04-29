@@ -140,9 +140,9 @@
 	        <button type="submit">Profile Management</button><br>
         </form>
         <?php
-        $servername = "sql203.epizy.com";
-        $username = "epiz_28288046";
-        $password = "wSejTvlnICy";
+        $servername = "127.0.0.1";
+        $username = "root";
+        $password = "";
         $db = "epiz_28288046_fuelQuotes";
         $conn = new MySQLi($servername, $username, $password, $db);
         if (!$conn) {
